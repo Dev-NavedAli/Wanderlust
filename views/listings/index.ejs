@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>airbnb</title>
-</head>
-<body>
-    <h1>All listings</h1>
-    <form action="/listing/new" method="GET">
-        <button>Create New listing</button>
-    </form>
-    <ul>
-        <% for(let listings of allListings){  %>
-            <li><a href="/listings/<%= listings._id %>"><%= listings.title %></a></li>
-            
-        <% } %>
-        </ul>
+<%- layout ("/layouts/boilerplate") -%>
 
-</body>
-</html>
+    <body>
+        <h1>All listings</h1>
+        <!-- <form action="/listing/new" method="GET">
+        <button>Create New listing</button>
+    </form> -->
+        <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+            <% for(let listing of allListings){ %>
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                    <div class="card col" style="width: 20.5rem;">
+                        <img src="<%= listing.image %>" class="card-img-top" alt="listing image">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <%= listing.title %><br>
+                                    <%= listing.price.toLocaleString("en-In") %>/night
+                            </p>
+                        </div>
+                    </div>
+                    <% } %>
+                </a>
+        </div>

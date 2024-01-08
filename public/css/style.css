@@ -1,0 +1,124 @@
+body{
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    display: flex; /*equation -----1---jo hmara footer hota templating se maximun time pr poora fit nhi bethta islieye jo hmara class conatiner ko display flex deke min-height ko 100vh de denge */ 
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+.container{
+    flex: 1 !important;  
+}
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.f-info-links a{
+    text-decoration: none;
+    color: #222222;
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+.f-info{
+    display: flex;
+    text-align: center;
+    height: 8rem;
+    background-color: #c7c7c773;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:space-evenly ;
+}
+
+.f-info-links,.f-info-socials,.f-info-brand{
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i{
+    margin-right: 2rem;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+.f-info-socials{
+    margin-left: 1.5rem;
+}
+
+.navbar-brand i {
+    font-weight: 500;
+}
+
+.f-info-brand{
+    color: black;
+}
+
+/*Cards*/
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    height: 22rem !important;
+    object-fit: cover !important;
+    width: 20rem !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+.card-text p{
+    font-weight: 400 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+    color: black;
+}
+
+/* Card Effect */
+.card-img-overlay{
+    opacity: 0 ; 
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* New Page */
+
+.add-btn{
+    background-color: #ff385c !important;
+    border: none !important;
+}
+
+
+/* Edit page */
+.edit-btn{
+    background-color:#ff385c !important;
+    border: none !important;
+}
+
+
+/* SHOW PAGE */
+
+.show-img{
+    height: 30vh !important;
+    width: 80% !important;
+}
+
+.btns{
+    display: flex;
+}
