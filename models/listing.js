@@ -9,7 +9,7 @@ const listingSchema = new Schema({
     description :String,
     image : {
         type: String,
-        default: "link",
+        default: "",
         set : (v)=>
         v ===""
             ?"link"

@@ -102,6 +102,7 @@ body{
 .add-btn{
     background-color: #ff385c !important;
     border: none !important;
+    color: white !important;
 }
 
 
@@ -109,6 +110,7 @@ body{
 .edit-btn{
     background-color:#ff385c !important;
     border: none !important;
+    color: white !important;
 }
 
 
@@ -121,4 +123,9 @@ body{
 
 .btns{
     display: flex;
+}
+
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
 }
