@@ -3,7 +3,10 @@
         <div class="col-8 offset-2">
 
             <h3>Create a New Listing</h3>
-            <form action="/listings" method="post" novalidate class="needs-validation">
+            <form action="/listings"
+            method="post"
+            novalidate
+            class="needs-validation">
                 <div class="mb-3">
                     <label for="title" class="form-label">Tittle</label>
                     <input
@@ -13,10 +16,13 @@
                     class="form-control"
                     required
                     />
+                    <div class="invalid-feedback">Title must be there</div>
+                    <div class="valid-feedback">Title looks good!</div>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">description</label>
                     <textarea name="listing[description]" placeholder="enter description"class="form-control" required></textarea>
+                    <div class="invalid-feedback">Please enter a short description</div>
                 </div>
 
                 <div class="mb-3">
@@ -35,10 +41,10 @@
                     <input
                     name="listing[price]"
                     placeholder="1200"
-                    type="number"
                     class="form-control"
                     required
                     />
+                    <div class="invalid-feedback">Price should be valid</div>
                 </div>
 
                 <div class="mb-3 col-md-8">
@@ -50,6 +56,7 @@
                     class="form-control"
                     required
                     />
+                    <div class="invalid-feedback">Please enter the country name</div>
                 </div>
             </div>
 
@@ -62,6 +69,7 @@
                     class="form-control"
                     required
                     />
+                    <div class="invalid-feedback">Location should be valid</div>
                 </div>
                 
                 <br>
