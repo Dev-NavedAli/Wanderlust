@@ -1,37 +1,70 @@
 <%- layout("/layouts/boilerplate") %>
     <div class="row">
         <div class="col-8 offset-2">
+
             <h3>Create a New Listing</h3>
-            <form action="/listings" method="post">
+            <form action="/listings" method="post" novalidate class="needs-validation">
                 <div class="mb-3">
                     <label for="title" class="form-label">Tittle</label>
-                    <input name="listing[title]" placeholder="Add a catch title" type="text" class="form-control">
+                    <input
+                    name="listing[title]"
+                    placeholder="Add a catch title"
+                    type="text"
+                    class="form-control"
+                    required
+                    />
                 </div>
-
                 <div class="mb-3">
                     <label for="description" class="form-label">description</label>
-                    <textarea name="listing[description]" placeholder="enter description"
-                        class="form-control"></textarea>
+                    <textarea name="listing[description]" placeholder="enter description"class="form-control" required></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Image link</label>
-                    <input name="listing[image]" placeholder="enter image URL/Link" type="text" class="form-control">
+                    <input
+                    name="listing[image]"
+                    placeholder="enter image URL/Link"
+                    type="text"
+                    class="form-control"
+                    />
                 </div>
+
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="price" class="form-label">Price</label>
-                    <input name="listing[price]" placeholder="1200" type="number" class="form-control">
+                    <input
+                    name="listing[price]"
+                    placeholder="1200"
+                    type="number"
+                    class="form-control"
+                    required
+                    />
                 </div>
+
                 <div class="mb-3 col-md-8">
                     <label for="country" class="form-label">Country</label>
-                    <input name="listing[country]" placeholder="India" type="text" class="form-control">
+                    <input
+                    name="listing[country]"
+                    placeholder="India"
+                    type="text"
+                    class="form-control"
+                    required
+                    />
                 </div>
             </div>
+
                 <div class="mb-3">
                     <label for="location" class="form-label">location</label>
-                    <input name="listing[location]" placeholder="jaipur/Rajasthan" type="text" class="form-control">
-                </div><br>
+                    <input
+                    name="listing[location]"
+                    placeholder="jaipur/Rajasthan"
+                    type="text"
+                    class="form-control"
+                    required
+                    />
+                </div>
+                
+                <br>
                 <button class="btn add-btn">Add</button>
                 <br><br>
             </form>
