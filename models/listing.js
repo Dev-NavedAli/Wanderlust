@@ -9,10 +9,10 @@ const listingSchema = new Schema({
     description :String,
     image : {
         type: String,
-        default: "",
+        default: "https://images.unsplash.com/photo-1615874694520-474822394e73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG9tZSUyMGRlY29yfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
         set : (v)=>
         v ===""
-            ?"link"
+            ?""
             : v,
     },
     price : Number,
