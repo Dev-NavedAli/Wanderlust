@@ -7,7 +7,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema } = require("./schema.js")
+const { listingSchema } = require("./schema.js");
+const Review = require("./models/review.js")
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/airbnb";
 
@@ -103,6 +104,14 @@ app.delete(
     res.redirect("/listings");
 })
 );
+
+// Reviews
+// Post route 
+
+app.post("/listing/:id/reviews", async(req,res)=>{
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+});
 
 // app.get("/testListing", async (req,res)=>{
 //     let sampleListing = new Listing({
