@@ -34,7 +34,12 @@
             <br>
             <hr>
             <h4>Leave A Review </h4>
-            <form action="/listings/<%= listing._id %>/reviews" method="POST">
+            <form
+            action="/listings/<%= listing.id %>/reviews"
+            method="POST"
+            novalidate
+            class="needs-validation"
+            >
                 <div>
                     <label for="rating" class="form-label">Rating</label>
                     <input
@@ -51,7 +56,11 @@
                     id="comment" cols="30"
                     rows="7"
                     class="form-control"
+                    required
                     ></textarea>
+                    <div class="invalid-feedback">
+                        Please add some comment for review
+                    </div>
                 </div>
                 <button class="btn btn-outline-dark">Submit</button>
                 

@@ -7,7 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema } = require("./schema.js");
+const { listingSchema} = require("./schema.js");
 const Review = require("./models/review.js")
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/airbnb";
@@ -108,17 +108,18 @@ app.delete(
 // Reviews
 // Post route 
 
-app.post("/listings/:id/reviews", async(req,res)=>{
+app.post(
+    "/listings/:id/reviews",
+    async(req,res)=>{
     let listing = await Listing.findById(req.params.id);  //hum us listing ko acces krenge jiski id yha hmne di hai
     let newReview = new Review(req.body.review);
-
     listing.reviews.push(newReview);
 
     await newReview.save();
     await listing.save();
 
     console.log("new review saved ");
-    res.redirect(`/listings`); //not match as  mentors projects
+    res.redirect(`/listings`); //not match as  mentors projects (`/listings/${listing._id}`);
 });
 
 // app.get("/testListing", async (req,res)=>{
