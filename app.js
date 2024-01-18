@@ -108,9 +108,17 @@ app.delete(
 // Reviews
 // Post route 
 
-app.post("/listing/:id/reviews", async(req,res)=>{
-    let listing = await Listing.findById(req.params.id);
+app.post("/listings/:id/reviews", async(req,res)=>{
+    let listing = await Listing.findById(req.params.id);  //hum us listing ko acces krenge jiski id yha hmne di hai
     let newReview = new Review(req.body.review);
+
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    console.log("new review saved ");
+    res.redirect(`/listings`); //not match as  mentors projects
 });
 
 // app.get("/testListing", async (req,res)=>{
