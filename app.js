@@ -134,10 +134,22 @@ app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
 
     await newReview.save();
     await listing.save();
+    res.redirect(`/listings/${listing._id}`); //not match as  mentors projects (`/listings/${listing._id}`);
+})
+);
 
-    console.log("new review saved ");
-    res.redirect(`/listings`); //not match as  mentors projects (`/listings/${listing._id}`);
-}));
+//DELETE REVIEW ROUTE
+app.delete(
+    "/listings/:id/reviews/:reviewId",
+    wrapAsync(async(req,res)=>{
+    let {id,reviewId} = req.params;
+
+    await Listing.findByIdAndUpdate(id, {$pull: {reviews: reviewId}}) //reviews array me jis bhi review se  reviewid match kar jaaye hum us id pull krna chchte hai 
+    await Review.findById(reviewId);
+    res.redirect(`/listings/${id}`);
+}))
+
+
 
 // app.get("/testListing", async (req,res)=>{
 //     let sampleListing = new Listing({
