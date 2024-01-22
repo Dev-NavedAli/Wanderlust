@@ -1,16 +1,13 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Listing = require("./models/listing.js")
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema , reviewSchema} = require("./schema.js");
-const Review = require("./models/review.js")
 
 const listings = require("./routes/listing.js");
+const reviews = require("./routes/review.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/airbnb";
 
@@ -36,62 +33,8 @@ app.get("/", (req, res) => {
 });
 
 
-
-
-const validateReview = (req,res,next) =>{
-    let { error } = reviewSchema.validate(req.body);
-    if(error){
-        let errMsg = error.details.map((el)=> el.message).join(",");
-        throw new ExpressError(400,errMsg);
-    } else{
-        next();
-    }
-};
-
 app.use("/listings",listings);
-
-
-
-// Reviews
-// Post route 
-app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
-    let listing = await Listing.findById(req.params.id);  //hum us listing ko acces krenge jiski id yha hmne di hai
-    let newReview = new Review(req.body.review);
-
-    listing.reviews.push(newReview);
-
-    await newReview.save();
-    await listing.save();
-    res.redirect(`/listings/${listing._id}`); //not match as  mentors projects (`/listings/${listing._id}`);
-})
-);
-
-//DELETE REVIEW ROUTE
-app.delete(
-    "/listings/:id/reviews/:reviewId",
-    wrapAsync(async(req,res)=>{
-    let {id,reviewId} = req.params;
-
-    await Listing.findByIdAndUpdate(id, {$pull: {reviews: reviewId}}) //reviews array me jis bhi review se  reviewid match kar jaaye hum us id pull krna chchte hai 
-    await Review.findById(reviewId);
-    res.redirect(`/listings/${id}`);
-}))
-
-
-
-// app.get("/testListing", async (req,res)=>{
-//     let sampleListing = new Listing({
-//         title : "myphone",
-//         description:"oheoihewh",
-//         price: 1200,
-//         location : "Delhi",
-//         country : "India"
-//     });
-
-//     await sampleListing.save();
-//     console.log("sample was saved ");
-//     res.send("Succesfully saved");
-// })
+app.use("/listings/:id/reviews",reviews); //parent route agar hmara req.params parent se chlid ki taraf nhi jaara hai bcuz we r using routerto ise ham sort karne ke liye to review.js ke router object me hum ek option bhejte hai{mergeParams :true}
 
 app.all("*", (req,res,next)=>{
     next(new ExpressError(404,"Page Not Found!"));
