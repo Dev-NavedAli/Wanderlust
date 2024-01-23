@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 
 
 app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews); //parent route agar hmara req.params parent se chlid ki taraf nhi jaara hai bcuz we r using routerto ise ham sort karne ke liye to review.js ke router object me hum ek option bhejte hai{mergeParams :true}
+app.use("/listings/:id/reviews",reviews); //parent route agar hmara req.params parent se chlid ki taraf nhi jaara hai bcuz we r using router to ise ham sort karne ke liye to review.js ke router object me hum ek option bhejte hai{mergeParams :true}
 
 app.all("*", (req,res,next)=>{
     next(new ExpressError(404,"Page Not Found!"));
