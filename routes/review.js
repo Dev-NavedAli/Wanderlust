@@ -25,6 +25,8 @@ router.post("/",validateReview,wrapAsync(async(req,res)=>{
 
     await newReview.save();
     await listing.save();
+    req.flash("success", "New Review Created!")
+
     res.redirect(`/listings/${listing._id}`); //not match as  mentors projects (`/listings/${listing._id}`);
 })
 );
@@ -37,6 +39,8 @@ router.delete(
 
     await Listing.findByIdAndUpdate(id, {$pull: {reviews: reviewId}}) //reviews array me jis bhi review se  reviewid match kar jaaye hum us id pull krna chchte hai 
     await Review.findById(reviewId);
+    req.flash("success", "Review Deleted")
+
     res.redirect(`/listings/${id}`);
 }))
 
