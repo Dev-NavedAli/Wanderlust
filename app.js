@@ -52,8 +52,9 @@ app.use(flash());
 
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
     next();
-})
+});
 
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", reviews); //parent route agar hmara req.params parent se chlid ki taraf nhi jaara hai bcuz we r using router to ise ham sort karne ke liye to review.js ke router object me hum ek option bhejte hai{mergeParams :true}
