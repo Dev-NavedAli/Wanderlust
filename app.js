@@ -7,6 +7,9 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
@@ -50,11 +53,29 @@ app.get("/", (req, res) => {
 app.use(session(sessionOption));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));// authenticate() Generates a function that is used in Passport's LocalStrategyserializeUser() Generates a function that is used by Passport to serialize users into the sessiondeserializeUser() Generates a function that is used by Passport to deserialize users into the session
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     next();
 });
+
+app.get("/demouser", async (req,res)=>{
+    let fakeUser = new User({
+        email:"student@gmail.com",
+        username:"deltastudent" 
+    });
+    
+    let registeredUser = await User.register(fakeUser,"helloworld");
+    res.send(registeredUser);
+})
+
 
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", reviews); //parent route agar hmara req.params parent se chlid ki taraf nhi jaara hai bcuz we r using router to ise ham sort karne ke liye to review.js ke router object me hum ek option bhejte hai{mergeParams :true}

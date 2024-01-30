@@ -9,6 +9,6 @@ const userSchema = new Schema({
     },
 });
 // You're free to define your User how you like. Passport-Local Mongoose by default add a username, hash and salt field to store the username, the hashed password and the salt value.
-User.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', userSchema);
