@@ -30,10 +30,23 @@ router.get("/login", (req, res) => {
 router.post("/login",
     passport.authenticate("local",    //passport.authenticate ek middleware hai jo apne aap check kr lega database me ki id pass sahi hai ya galat we dont need to write the code.
     {failureRedirect: '/login',
-    failureFlash: true }),
+    failureFlash: true
+    }),
     async (req, res) => {
         req.flash("success","Welcome to Wanderlust");
         res.redirect("/listings")
-    })
+    }
+    );
+
+router.get("/logout",(req,res,next)=>{
+    req.logOut((err)=>{
+        if(err){
+            return next(err);
+        }
+        req.flash("success","you are logged out now");
+        res.redirect("/listings");
+    });
+})
+
 
 module.exports = router;
