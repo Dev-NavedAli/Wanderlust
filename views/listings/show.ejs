@@ -8,28 +8,32 @@
         <div class="card col-6 offset-3 show-card mt-3 listing-card">
             <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body">
+                <p class="card-text"><b>Owned By - </b><i><%= listing.owner.username %></i></p>
+                        
+                <p class="card-text"> <%= listing.description %></p>   
                 <p class="card-text">
-                    <br>
-                    <b>
-                        <%= listing.description %>
-                    </b><br>
-                    <b> &#8377; <%= listing.price.toLocaleString("en-In") %></b> <br>
-                    <b>
-                        <%= listing.location %>
-                    </b> <br>
-                    <b>
-                        <%= listing.country %>
-                    </b> <br>
-
+                    &#8377; <%= listing.price.toLocaleString("en-In") %>
                 </p>
+                    
+                <p class="card-text"><%= listing.location %></p>
+                <p class="card-text"><%= listing.country %></p>
             </div>
         </div>
+
+        <% if(currUser && currUser._id.equals(listing.owner._id)) { %>  <!-- agar currUser hai or uski id listing owner ki id se match hoti hai to delete or edit btn show hojaye --> 
         <div class="btns">
-            <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit </a>
+            <a
+            href="/listings/<%= listing._id %>/edit"
+            class="btn btn-dark col-1 offset-3 edit-btn"
+            >Edit</a>
+
             <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
                 <button class="btn btn-dark  offset-4">Delete</button>
             </form>
         </div>
+        
+        <% } %>
+
         <div class="col-8 offset-3 mb-3">
             <br>
             <hr>

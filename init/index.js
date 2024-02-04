@@ -18,6 +18,7 @@ async function main(){
 
 const initDB = async () =>{
     await Listing.deleteMany({});
+    initData.data = initData.data.map((obj)=>({...obj,owner:"65bdf41a00626d17fc954c76"})); //iski madad se har ek object ke andar hum owner property lo add kr lenge
     await Listing.insertMany(initData.data);
     console.log("data was initialized")
 }
