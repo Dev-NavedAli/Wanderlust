@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
+const { saveRedirectUrl } = require("../middleware.js");
 
 router.get("/signup", (req, res) => {
     res.render("users/signup.ejs");
@@ -33,14 +34,17 @@ router.get("/login", (req, res) => {
     res.render("users/login.ejs")
 })
 
-router.post("/login",
+router.post(
+    "/login",
+    saveRedirectUrl,
     passport.authenticate("local",    //passport.authenticate ek middleware hai jo apne aap check kr lega database me ki id pass sahi hai ya galat we dont need to write the code.
     {failureRedirect: '/login',
     failureFlash: true
     }),
     async (req, res) => {
         req.flash("success","Welcome to Wanderlust");
-        res.redirect("/listings")
+        let redirectUrl = res.locals.redirectUrl || "/listings" ; 
+        res.redirect(redirectUrl)
     }
     );
 
