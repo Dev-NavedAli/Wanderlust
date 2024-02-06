@@ -20,7 +20,8 @@
             </div>
         </div>
 
-        <% if(currUser && currUser._id.equals(listing.owner._id)) { %>  <!-- agar currUser hai or uski id listing owner ki id se match hoti hai to delete or edit btn show hojaye --> 
+        <!-- agar currUser hai or uski id listing owner ki id se match hoti hai to delete or edit btn show hojaye --> 
+
         <div class="btns">
             <a
             href="/listings/<%= listing._id %>/edit"
@@ -32,8 +33,7 @@
             </form>
         </div>
         
-        <% } %>
-
+        
         <div class="col-8 offset-3 mb-3">
             <br>
             <hr>

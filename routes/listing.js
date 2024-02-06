@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js")
-const {isLoggedIn} = require("../middleware.js");
+const {isLoggedIn, isOwner} = require("../middleware.js");
 
 
 const validateListing = (req,res,next) =>{
@@ -51,7 +51,7 @@ router.post(
     validateListing,
     wrapAsync(async (req, res, next) => {
         const newListing = new Listing(req.body.listing);
-        newListing.owner = req.user._id ;  //owner ko listing se connect kiya h
+        newListing.owner = req.user._id ;  //req.user me curr user ki id req.user._id me save hoti hai jisko passport by default save karata hai or is line se hum ye bata rahe hai jo hmara newListing ka owner ho uske andar currrent user ki hi id store ho
         await newListing.save();
         req.flash("success", "New Listing Created!")
         res.redirect("/listings");
@@ -62,6 +62,7 @@ router.post(
 router.get(
     "/:id/edit",
     isLoggedIn,
+    isOwner,
     wrapAsync (async(req, res) => {
         let { id } = req.params;
         const listing = await Listing.findById(id);
@@ -77,6 +78,7 @@ router.get(
 // UPDATE ROUTE
 router.put("/:id",
         isLoggedIn,
+        isOwner,
         validateListing,
         wrapAsync (async (req, res) => {
     let { id } = req.params;
@@ -91,6 +93,7 @@ router.put("/:id",
 router.delete(
     "/:id",
     isLoggedIn,
+    isOwner,
     wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
