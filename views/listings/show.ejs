@@ -22,21 +22,26 @@
 
         <!-- agar currUser hai or uski id listing owner ki id se match hoti hai to delete or edit btn show hojaye --> 
 
-        <div class="btns">
-            <a
+        <% if(currUser && listing.owner._id.equals(currUser._id)){ %>
+        <div 
+        class="btns">
+        <a
             href="/listings/<%= listing._id %>/edit"
             class="btn btn-dark col-1 offset-3 edit-btn"
-            >Edit</a>
+            >Edit
+        </a>
 
             <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
                 <button class="btn btn-dark  offset-4">Delete</button>
             </form>
         </div>
+        <% } %>
+        
         
         
         <div class="col-8 offset-3 mb-3">
             <br>
-            <hr>
+            <% if(currUser) { %>
             <h4>Leave A Review </h4>
             <form
             action="/listings/<%= listing.id %>/reviews"
@@ -66,9 +71,9 @@
                         Please add some comment for review
                     </div>
                 </div>
-                <button class="btn btn-outline-dark">Submit</button>
-                
+                <button class="btn btn-outline-dark">Submit</button>        
             </form>
+            <% } %>
 
 
             <hr>
