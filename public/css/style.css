@@ -71,9 +71,9 @@ body{
 .card-img-top{
     border-radius: 1rem !important;
     width: 100% !important;
-    height: 22rem !important;
+    height: 21rem !important;
     object-fit: cover !important;
-    width: 20rem !important;
+    width: 20.5rem !important;
 }
 
 .card-body{
