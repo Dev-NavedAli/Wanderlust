@@ -9,19 +9,26 @@ const listingController = require("../controllers/listings.js");
 router
     .route("/")
         .get(wrapAsync(listingController.index))
-    .post(                                   //index or create route ke path same the isiliye inhe or efficient      tarike se likhne ke liye we use router.route 
+    .post(                                   //index and create === route ke path same the isiliye inhe or efficient      tarike se likhne ke liye we use router.route 
         isLoggedIn,
         validateListing,
         wrapAsync(listingController.createListing)
     );
 
-
-
 // NEW ROUTE
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
-// SHOW ROUTE
-router.get("/:id", wrapAsync(listingController.showListing));
+router
+    .route("/:id")
+    .get(wrapAsync(listingController.showListing))
+    .put(
+        isLoggedIn,
+        isOwner,
+        validateListing,
+        wrapAsync(listingController.updateListing)   //show , update and delete routes
+    )
+    .delete(
+        isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
 
 // EDIT ROUTE
 router.get(
@@ -29,23 +36,6 @@ router.get(
     isLoggedIn,
     isOwner,
     wrapAsync(listingController.renderEditForm)
-);
-
-// UPDATE ROUTE
-router.put(
-    "/:id",
-    isLoggedIn,
-    isOwner,
-    validateListing,
-    wrapAsync(listingController.updateListing)
-);
-
-//DELETE ROUTE
-router.delete(
-    "/:id",
-    isLoggedIn,
-    isOwner,
-    wrapAsync(listingController.destroyListing)
 );
 
 module.exports = router;
