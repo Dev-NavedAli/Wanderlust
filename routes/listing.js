@@ -3,17 +3,24 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const Listing = require("../models/listing.js");
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
-
 const listingController = require("../controllers/listings.js");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })    //Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+
+//yha multer form ke data se files ko nikalega or unhe uploads naam ke or automatically uploads naam ka folder or us uplaods naam ke folder ke andar files ko stor karayega 
 
 router
     .route("/")
         .get(wrapAsync(listingController.index))
-    .post(                                   //index and create === route ke path same the isiliye inhe or efficient      tarike se likhne ke liye we use router.route 
-        isLoggedIn,
-        validateListing,
-        wrapAsync(listingController.createListing)
-    );
+    // .post(                                   //index and create === route ke path same the isiliye inhe or efficient tarike se likhne ke liye we use router.route ka use kia hai
+    //     isLoggedIn,
+    //     validateListing,
+    //     wrapAsync(listingController.createListing)
+    // );
+
+    .post( upload.single('listing[image]') , (req,res)=>{
+        res.send(req.file);
+    })
 
 // NEW ROUTE
 router.get("/new", isLoggedIn, listingController.renderNewForm);

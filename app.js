@@ -48,7 +48,7 @@ const sessionOption = {
 };
 
 app.get("/", (req, res) => {
-    res.send("you are on the root node");
+    res.redirect("/listings");
 });
 
 app.use(session(sessionOption));

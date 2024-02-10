@@ -6,7 +6,8 @@
             <form action="/listings"
             method="post"
             novalidate
-            class="needs-validation">
+            class="needs-validation"
+            enctype="multipart/form-data">   <!-- enctype ="multipart/form-data  krne se hamara form capable ho jaata hai to send files to our backend and change the input type text to file "--> 
                 <div class="mb-3">
                     <label for="title" class="form-label">Tittle</label>
                     <input
@@ -20,17 +21,18 @@
                     <div class="valid-feedback">Title looks good!</div>
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">description</label>
+                    <label for="description" class="form-label">Description</label>
                     <textarea name="listing[description]" placeholder="enter description"class="form-control" required></textarea>
                     <div class="invalid-feedback">Please enter a short description</div>
                 </div>
 
+            
+
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image link</label>
+                    <label for="image" class="form-label">Upload Listing Image</label>
                     <input
                     name="listing[image]"
-                    placeholder="enter image URL/Link"
-                    type="text"
+                    type="file"
                     class="form-control"
                     />
                 </div>
@@ -61,7 +63,7 @@
             </div>
 
                 <div class="mb-3">
-                    <label for="location" class="form-label">location</label>
+                    <label for="location" class="form-label">Location</label>
                     <input
                     name="listing[location]"
                     placeholder="jaipur/Rajasthan"
