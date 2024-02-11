@@ -28,8 +28,12 @@ module.exports.showListing = async (req, res) => {
 }
 
 module.exports.createListing = async (req, res, next) => {
+    let url = req.file.path;
+    let filename = req.file.filename;
+    
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id ;  //req.user me curr user ki id req.user._id me save hoti hai jisko passport by default save karata hai or is line se hum ye bata rahe hai jo hmara newListing ka owner ho uske andar currrent user ki hi id store ho
+    newListing.image = {url ,filename};
     await newListing.save();
     req.flash("success", "New Listing Created!")
     res.redirect("/listings");

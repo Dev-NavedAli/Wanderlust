@@ -14,15 +14,12 @@ const upload = multer({ storage }) ;   //Multer is a node.js middleware for hand
 router
     .route("/")
         .get(wrapAsync(listingController.index))
-    // .post(                                   //index and create === route ke path same the isiliye inhe or efficient tarike se likhne ke liye we use router.route ka use kia hai
-    //     isLoggedIn,
-    //     validateListing,
-    //     wrapAsync(listingController.createListing)
-    // );
-
-    .post( upload.single('listing[image]') , (req,res)=>{
-        res.send(req.file);
-    })
+    .post(                                   //index and create === route ke path same the isiliye inhe or efficient tarike se likhne ke liye we use router.route ka use kia hai
+        isLoggedIn,
+        // validateListing,
+        upload.single('listing[image]') ,
+        wrapAsync(listingController.createListing)
+    )
 
 // NEW ROUTE
 router.get("/new", isLoggedIn, listingController.renderNewForm);
