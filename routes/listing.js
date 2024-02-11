@@ -5,9 +5,11 @@ const Listing = require("../models/listing.js");
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })    //Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+const {storage} = require("../cloudConfig.js");
+const upload = multer({ storage }) ;   //Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
 
 //yha multer form ke data se files ko nikalega or unhe uploads naam ke or automatically uploads naam ka folder or us uplaods naam ke folder ke andar files ko stor karayega 
+
 
 router
     .route("/")
