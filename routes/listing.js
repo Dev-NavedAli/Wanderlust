@@ -16,8 +16,8 @@ router
         .get(wrapAsync(listingController.index))
     .post(                                   //index and create === route ke path same the isiliye inhe or efficient tarike se likhne ke liye we use router.route ka use kia hai
         isLoggedIn,
-        // validateListing,
         upload.single('listing[image]') ,
+        validateListing,
         wrapAsync(listingController.createListing)
     )
 
@@ -30,6 +30,7 @@ router
     .put(
         isLoggedIn,
         isOwner,
+        upload.single('listing[image]'),
         validateListing,
         wrapAsync(listingController.updateListing)   //show , update and delete routes
     )
