@@ -46,7 +46,11 @@ module.exports.renderEditForm = async(req, res) => {
         req.flash("error","Listing you requested for does not exist");
         res.redirect("/listings");
     };
-    res.render("listings/edit.ejs", { listing });
+
+    let originalImageUrl = listing.image.url;
+    originalImageUrl = originalImageUrl.replace("/upload","/upload/h_300,w_250") //inki help se edit.ejs me jo photo aara hai uska size or blurryness aajayegi or size bhi kam hoga 
+
+    res.render("listings/edit.ejs", { listing ,originalImageUrl });
 }
 
 module.exports.updateListing = async (req, res) => {

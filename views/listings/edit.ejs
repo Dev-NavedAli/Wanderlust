@@ -30,6 +30,12 @@
                 </div>
 
                 <div class="mb-3">
+                    Original Lisitng Image
+                    <br>
+                    <img src="<%= originalImageUrl %>" id="dynamic">
+                </div>
+
+                <div class="mb-3">
                     <label for="image" class="form-label">Upload New Image</label>
                     <input
                     name="listing[image]"
@@ -48,9 +54,11 @@
                         type="number"
                         class="form-control"
                         required
+                        id="khnm"
                         />
                         <div class="invalid-feedback">Price should be valid</div>
                     </div>
+
 
                     <div class="mb-3 col-md-8">
                         <label for="country" class="form-label">Country</label>

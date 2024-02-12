@@ -129,3 +129,15 @@ body{
     padding-left: 0;
     padding-right: 0;
 }
+
+#dynamic{
+    height: 130px !important;
+    width: 200px !important;
+}
+
+
+/* Map */
+#map { 
+    height: 400px;
+    width: 100vh;
+}
