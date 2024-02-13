@@ -1,4 +1,8 @@
-const Listing = require("../models/listing.js")
+const Listing = require("../models/listing.js");
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocodiing');
+const mapToken = process.env.MAP_TOKEN;
+const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+
 
 module.exports.index = async (req, res) => {
     const allListings = await Listing.find({});
@@ -12,56 +16,64 @@ module.exports.renderNewForm = (req, res) => {
 module.exports.showListing = async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id)
-    .populate({
-        path: "reviews",     // yha pr hmm nested populate kr rhe hai taki reviews ke sath sath uske auhor ko bhi dikha sakien
-        populate:{
-            path:"author",
-        }                                   
-        ,
-    })
-    .populate("owner");
-    if(!listing){
-        req.flash("error","Listing you requested for does not exist");
+        .populate({
+            path: "reviews",     // yha pr hmm nested populate kr rhe hai taki reviews ke sath sath uske auhor ko bhi dikha sakien
+            populate: {
+                path: "author",
+            }
+            ,
+        })
+        .populate("owner");
+    if (!listing) {
+        req.flash("error", "Listing you requested for does not exist");
         res.redirect("/listings");
     }
     res.render("listings/show.ejs", { listing })
 }
 
 module.exports.createListing = async (req, res, next) => {
+    let response = await geocodingClient.forwardGeocode({
+        query: 'New Delhi, India',
+        limit: 1,
+    })
+        .send();
+    console.log(response);
+    res.send("done");
+    
     let url = req.file.path;
     let filename = req.file.filename;
-    
+
     const newListing = new Listing(req.body.listing);
-    newListing.owner = req.user._id ;  //req.user me curr user ki id req.user._id me save hoti hai jisko passport by default save karata hai or is line se hum ye bata rahe hai jo hmara newListing ka owner ho uske andar currrent user ki hi id store ho
-    newListing.image = {url ,filename};
+    newListing.owner = req.user._id;  //req.user me curr user ki id req.user._id me save hoti hai jisko passport by default save karata hai or is line se hum ye bata rahe hai jo hmara newListing ka owner ho uske andar currrent user ki hi id store ho
+    newListing.image = { url, filename };
     await newListing.save();
     req.flash("success", "New Listing Created!")
     res.redirect("/listings");
 }
 
-module.exports.renderEditForm = async(req, res) => {
+module.exports.renderEditForm = async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
-    if(!listing){
-        req.flash("error","Listing you requested for does not exist");
+    if (!listing) {
+        req.flash("error", "Listing you requested for does not exist");
         res.redirect("/listings");
     };
 
     let originalImageUrl = listing.image.url;
-    originalImageUrl = originalImageUrl.replace("/upload","/upload/h_300,w_250") //inki help se edit.ejs me jo photo aara hai uska size or blurryness aajayegi or size bhi kam hoga 
+    originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250") //inki help se edit.ejs me jo photo aara hai uska size or blurryness aajayegi or size bhi kam hoga 
 
-    res.render("listings/edit.ejs", { listing ,originalImageUrl });
+    res.render("listings/edit.ejs", { listing, originalImageUrl });
 }
 
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    
-    if(typeof req.file !=="undefined"){
-    let url = req.file.path;             //isme agar req.file ki value undefined rahi to ye code execute nhi hoga
-    let filename = req.file.filename;
-    listing.image = {url , filename};
-    await listing.save();
+
+    if (typeof req.file !== "undefined") {
+        let url = req.file.path;             //isme agar req.file ki value undefined rahi to ye code execute nhi hoga
+        let filename = req.file.filename;
+        listing.image = { url, filename };
+        await listing.save();
     }
     req.flash("success", " Listing Updated!")
     res.redirect(`/listings/${id}`);
