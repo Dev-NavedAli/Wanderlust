@@ -1,7 +1,8 @@
 <%- layout ("/layouts/boilerplate") -%>
 <script>
     const mapToken = "<%= process.env.MAP_TOKEN %>";
-    const coordinates = <%- JSON.stringify(listing.geometry.coordinates) %>; //yha json.srtingyfy se data parse ho ra h 
+    const listing = <%- JSON.stringify(listing) %>; //yha json.srtingyfy se data parse ho ra h 
+
 </script>
     <div class="row mt-3">
         <div class="col-8 offset-3">
