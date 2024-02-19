@@ -36,17 +36,19 @@ module.exports.createListing = async (req, res, next) => {
         query: req.body.listing.location,
         limit: 1,
     })
-        .send();
-    console.log(response.body.features[0].geometry); //accesing the coordinates which we give in to add new listing with the help of geocoding
-    res.send("done");
+    .send();
+
     
     let url = req.file.path;
     let filename = req.file.filename;
-
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;  //req.user me curr user ki id req.user._id me save hoti hai jisko passport by default save karata hai or is line se hum ye bata rahe hai jo hmara newListing ka owner ho uske andar currrent user ki hi id store ho
     newListing.image = { url, filename };
-    await newListing.save();
+
+    newListing.geometry = response.body.features[0].geometry; //accesing the coordinates which we give in to add new listing with the help of geocoding
+
+    let savedListing = await newListing.save();
+    console.log(savedListing);  
     req.flash("success", "New Listing Created!")
     res.redirect("/listings");
 }
