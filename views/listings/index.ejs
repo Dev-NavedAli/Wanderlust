@@ -1,15 +1,21 @@
 <%- layout ("/layouts/boilerplate") -%>
+    <style>
+        .filters {
+            margin-top: 1rem;
+        }
+    </style>
 
     <body>
-        <h1 class="mt-3">All listings</h1>
-        <br><br>
-        <!-- <form action="/listing/new" method="GET">
-        <button>Create New listing</button>
-    </form> -->
-        <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+        <div class="filters">
+            <div class="filter">
+                <div> <i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
+            </div>
+        </div>
+        <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
             <% for(let listing of allListings){ %>
                 <a href="/listings/<%= listing._id %>" class="listing-link">
-                    <div class="card col listing-card" style="width: 20.5rem;">
+                    <div class="card col listing-card" style="width: 21.5rem;">
                         <img src="<%= listing.image.url %>" class="card-img-top" alt="listing image">
                         <div class="card-img-overlay"></div>
                         <div class="card-body">

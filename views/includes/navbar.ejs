@@ -6,17 +6,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" href="/">Home</a>
-                <a class="nav-link" href="/listings">All listing</a>
-                <a class="nav-link" href="/listings/new">Add new Listing</a>
+                <a class="nav-link" href="/listings">Explore</a>
             </div>
             <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/listings/new">Airbnb your home</a>
                 <% if(!currUser){  %>   <!--hum yha pe req.user isilye nhi likh sakte qki req ejs me accesible nhi hai isiliye humne req.user ko app.js me res.locals naam  ke middleware ke  ander currUser ke naam se save kra liya or usko idhr pass kr diya,----and if we want to know how we are looged in or not go to middleware.js and and if we console req.user if we click to add new listing. The value of req.user is must be undefined on console window. if some array in the console window so user us time logged in hoga  -->
-                <a class="nav-link" href="/signup">Signup</a>
-                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/signup"><b>Signup</b></a>
+                <a class="nav-link" href="/login"><b>Login</b></a>
                 <% } %>   
                 <% if(currUser){  %>
-                <a class="nav-link" href="/logout">Logout</a>
+                <a class="nav-link" href="/logout"><b>Logout</b></a>
                 <% } %>  
             </div>
         </div>

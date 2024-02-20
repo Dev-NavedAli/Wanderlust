@@ -51,9 +51,9 @@ const sessionOption = {
     },
 };
 
-app.get("/", (req, res) => {
-    res.redirect("/listings");
-});
+// app.get("/", (req, res) => {
+//     res.redirect("/listings");
+// });
 
 app.use(session(sessionOption));
 app.use(flash());
