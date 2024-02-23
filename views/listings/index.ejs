@@ -1,15 +1,64 @@
 <%- layout ("/layouts/boilerplate") -%>
     <style>
-        .filters {
-            margin-top: 1rem;
+        #filters{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .filter i {
+            font-size: 1.8rem;
+        }
+        .filter p {
+            font-size: 0.8rem;
+        }
+        .filter{
+            text-align: center;
+            margin-right: 2rem;
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+        .filter:hover{
+            opacity: 1;
+            cursor: pointer;
         }
     </style>
 
     <body>
-        <div class="filters">
+        <div id="filters">
             <div class="filter">
-                <div> <i class="fa-solid fa-fire"></i></div>
+                <div> <i class="fa-solid fa-fire"></i></div>    
                 <p>Trending</p>
+            </div>
+            <div class="filter">
+                <div> <i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </div>
+            <div class="filter">
+                <div> <i class="fa-solid fa-mountain-city"></i></div>    
+                <p>Iconic Cities</p>
+            </div>
+            <div class="filter">
+                <div> <i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </div>
+            <div class="filter">
+                <div> <i class="fa-brands fa-fort-awesome"></i></div>    
+                <p>Castles</p>
+            </div>
+            <div class="filter">
+                <div> <i class="fa-solid fa-person-swimming"></i></div>
+                <p> Amazing Pools</p>
+            </div>
+            <div class="filter">
+                <div> <i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </div>
+            <div class="filter">
+                <div> <i class="fa-brands fa-fort-awesome"></i></div>    
+                <p>Farms</p>
+            </div>
+            <div class="filter">
+                <div> <i class="fa-solid fa-snowflake"></i></div>
+                <p> Arcitic</p>
             </div>
         </div>
         <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
