@@ -10,6 +10,7 @@ const upload = multer({ storage }) ;   //Multer is a node.js middleware for hand
 
 //yha multer form ke data se files ko nikalega or unhe uploads naam ke or automatically uploads naam ka folder or us uplaods naam ke folder ke andar files ko stor karayega 
 
+router.get("/listings",(wrapAsync(listingController.index)));
 
 router
     .route("/")
