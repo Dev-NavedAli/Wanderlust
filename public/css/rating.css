@@ -196,7 +196,6 @@ screen and (min-resolution: 192dpi) {
         display: none;
     }
 }
-
 .starability-slot>input:checked~label,
 .starability-slot>input:hover~label,
 .starability-slot>input:focus~label {
