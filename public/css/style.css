@@ -88,6 +88,16 @@ body{
     color: black;
 }
 
+@media(max-width:950px){
+    .listing-card{
+        width: 3658px !important ;
+    }
+    .navbar{
+        width: 100% !important;
+    }
+}
+
+
 /* Card Effect */
 .card-img-overlay{
     opacity: 0 ; 
@@ -138,6 +148,6 @@ body{
 
 /* Map */
 #map { 
-    height: 400px;
+    height: 400px !important;
     /* width: 100vh; */
 }
