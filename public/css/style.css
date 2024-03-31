@@ -73,7 +73,7 @@ body{
     width: 100% !important;
     height: 22rem !important;
     object-fit: cover !important;
-    width: 23rem !important;
+    width: 100%!important;
 }
 
 .card-body{
