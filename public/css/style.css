@@ -88,14 +88,6 @@ body{
     color: black;
 }
 
-@media(max-width:950px){
-    .listing-card{
-        width: 3658px !important ;
-    }
-    .navbar{
-        width: 100% !important;
-    }
-}
 
 
 /* Card Effect */
