@@ -95,14 +95,7 @@
                     <div> <i class="fa-solid fa-snowflake"></i></div>
                     <p> Arctic</p>
                 </div>
-                <div class="filter">
-                    <div> <i class="fa-solid fa-igloo"></i></div>
-                    <p>Igloo</p>
-                </div>
-                <div class="filter">
-                    <div> <i class="fa-solid fa-umbrella-beach"></i></div>
-                    <p>beach</p>
-                </div>
+
                 <div class="tax-toggle">
                     <div class="form-check-reverse form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
@@ -122,7 +115,7 @@
                                         <%= listing.title %>
                                     </b><br>
                                     <%= listing.price.toLocaleString("en-In") %>
-                                        <i class="tax-info"> &nbsp; 18% GST</i>
+                                        <i class="tax-info"> &nbsp; listing.price*1.18</i>
                                 </p>
 
                             </div>
