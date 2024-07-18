@@ -1,7 +1,7 @@
 <%- layout ("/layouts/boilerplate") -%>
 <script>
     const mapToken = "<%= process.env.MAP_TOKEN %>";
-    const listing = <%- JSON.stringify(listing) %>; //yha json.srtingyfy se data parse ho ra h 
+    const listing = "<%- JSON.stringify(listing) %>"; //yha json.srtingyfy se data parse ho ra h 
 
 </script>
     <div class="row mt-3">
@@ -123,8 +123,20 @@
         </div>
         <div class="col-8 offset-3 mb-3">
             <h3>Where you'll be</h3>
-            <div id="map">    
-            </div>
+            <div id="map"></div>
+            <script>
+                const map = new maplibregl.Map({
+                    container: 'map',
+                    style:
+                        'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+                    center: [79.4304, 28.3670],
+                    zoom: 8
+                });
+            
+                const marker = new maplibregl.Marker()
+                    .setLngLat([79.4304, 28.3670])
+                    .addTo(map);
+            </script>
         </div>    
     </div>
 
