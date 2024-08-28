@@ -1,7 +1,4 @@
 const Listing = require("../models/listing.js");
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding-v6.js');
-const mapToken = process.env.MAP_TOKEN;
-const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 
 module.exports.index = async (req, res,next) => {
@@ -13,7 +10,7 @@ module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs")
 }
 
-module.exports.showListing = async (req, res,next) => {
+module.exports.showListing = async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id)
         .populate({
@@ -32,20 +29,19 @@ module.exports.showListing = async (req, res,next) => {
 }
 
 module.exports.createListing = async (req, res, next) => {
-    let response = await geocodingClient.forwardGeocode({
-        query: req.body.listing.location,
-        limit: 1,
-    })
-    .send();
+    let {location} = req.body.listing;
 
-    
+    const data = await fetch("https://geocode.maps.co/search?q="+location.split(", ").join("+")+"&api_key=668cdc66180b5425798827zyxafe37a")
+    const json = await data.json();
+    let {lon, lat} = json[0];
+
     let url = req.file.path;
     let filename = req.file.filename;
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;  //req.user me curr user ki id req.user._id me save hoti hai jisko passport by default save karata hai or is line se hum ye bata rahe hai jo hmara newListing ka owner ho uske andar currrent user ki hi id store ho
     newListing.image = { url, filename };
 
-    newListing.geometry = response.body.features[0].geometry; //accesing the coordinates which we give in to add new listing with the help of geocoding
+    newListing.geometry ={type: 'Point', coordinates: [lon, lat]}; //accesing the coordinates which we give in to add new listing with the help of geocoding
 
     let savedListing = await newListing.save();
     console.log(savedListing);  
