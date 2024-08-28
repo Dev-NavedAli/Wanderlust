@@ -1,9 +1,8 @@
 <%- layout ("/layouts/boilerplate") -%>
 <script>
-    const mapToken = "<%= process.env.MAP_TOKEN %>";
-    const listing = "<%- JSON.stringify(listing) %>"; //yha json.srtingyfy se data parse ho ra h 
-
-</script>
+    const coordinates = <%- JSON.stringify(listing.geometry.coordinates) %>;
+    const locate = <%- JSON.stringify(listing.location) %>;
+  </script>
     <div class="row mt-3">
         <div class="col-8 offset-3">
             <h3>
@@ -125,7 +124,7 @@
             <h3>Where you'll be</h3>
             <div id="map" style='width: 400px; height: 300px;' class="mt-8"></div>
             
-            <script>
+            <!-- <script>
                 const map = new maplibregl.Map({
                     container: 'map',
                     style:
@@ -137,7 +136,7 @@
                 const marker = new maplibregl.Marker()
                     .setLngLat([79.4304, 28.3670])
                     .addTo(map);
-            </script>
+            </script> -->
         </div>    
     </div>
 
