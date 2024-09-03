@@ -44,7 +44,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const store = MongoStore.create({
-    mongoUrl : dbUrls,
+    mongoUrl : dbUrl,
     crypto:{                            //this is how we store our session related info in our mongoatlas
         secret : process.env.SECRET,
     },
