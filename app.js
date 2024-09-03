@@ -44,7 +44,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const store = MongoStore.create({
-    mongoUrl : dbUrl,
+    mongoUrl : dbUrls,
     crypto:{                            //this is how we store our session related info in our mongoatlas
         secret : process.env.SECRET,
     },
@@ -113,6 +113,7 @@ app.use((err, req, res, next) => {
     //res.status(statusCode).send(message);
     res.status(statusCode).render("listings/error.ejs", { message });
 });
+
 
 app.listen(8080, () => {
     console.log("server is listening at the port 8080");
