@@ -14,13 +14,13 @@
             <div class="card-body">
                 <p class="card-text"><b>Owned By - </b><i><%= listing.owner.username %></i></p>
                         
-                <p class="card-text"> <%= listing.description %></p>   
-                <p class="card-text">
+                <p class="card-text"><b>Description - </b> <%= listing.description %></p>   
+                <p class="card-text"><b>Price - </b>
                     &#8377; <%= listing.price.toLocaleString("en-In") %>
                 </p>
                     
-                <p class="card-text"><%= listing.location %></p>
-                <p class="card-text"><%= listing.country %></p>
+                <p class="card-text"><b>Location - </b><%= listing.location %></p>
+                <p class="card-text"><b>Country - </b><%= listing.country %></p>
             </div>
         </div>
 
@@ -120,6 +120,18 @@
             </div>
             <% } %>
         </div>
+        <style>
+            #map{
+                width: 400px !important;
+                height: 300px !important;
+            }
+            @media (max-width:500px){
+              #map{
+                width: 200px !important;
+                height: 200px !important;
+              }
+            }
+        </style>
         <div class="col-8 offset-3 mb-3">
             <h3>Where you'll be</h3>
             <div id="map" style='width: 400px; height: 300px;' class="mt-8"></div>

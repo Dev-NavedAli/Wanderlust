@@ -95,8 +95,6 @@ module.exports.index = async (req, res,next) => {
         allListings = await Listing.find({});
     }
     
-
-    
     res.render("listings/index.ejs", { allListings });
 };
 
