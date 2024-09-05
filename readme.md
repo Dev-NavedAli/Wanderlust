@@ -1,4 +1,4 @@
-#Project Overview
+<h1>Project Overview</h1>
 Excited to share my journey of developing a  full-stack web application inspired by Airbnb. The project is built using MongoDB, Express.js, and Node.js.
 
 #Technologies & Packages Used
