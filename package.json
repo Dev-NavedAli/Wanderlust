@@ -1,11 +1,12 @@
 {
   "engines": {
-    "node": "18.x"
+    "node": "20.x",
+    "npm":">=10.x"
   },
   "name": "mainproject",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
